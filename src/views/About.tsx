@@ -80,7 +80,7 @@ export default function About() {
       <section className="relative h-72 md:h-80 overflow-hidden">
         <img
           src={IMAGES.campus}
-          alt="Campus"
+          alt="Bululwe school campus aerial view"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 gradient-hero opacity-90" />
@@ -138,7 +138,7 @@ export default function About() {
           >
             <img
               src={IMAGES.classroom}
-              alt="Historical"
+              alt="Bululwe classroom with wooden desks and blackboard"
               className="w-full h-72 md:h-80 object-cover"
             />
           </motion.div>
@@ -163,7 +163,7 @@ export default function About() {
                 className="glass rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4">
-                  <v.icon className="w-6 h-6 text-white" />
+                  <v.icon className="w-6 h-6 text-white" aria-hidden="true" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-foreground mb-2">
                   {t(v.title, v.titleSw, lang)}

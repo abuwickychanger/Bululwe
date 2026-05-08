@@ -42,7 +42,7 @@ export default function Contact() {
       <section className="relative h-72 md:h-80 overflow-hidden">
         <img
           src={IMAGES.campus}
-          alt="Contact"
+          alt="Bululwe campus grounds with trees and buildings"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 gradient-hero opacity-90" />
@@ -83,7 +83,7 @@ export default function Contact() {
                 {contactInfo.map((c) => (
                   <div key={c.label} className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shrink-0">
-                      <c.icon className="w-5 h-5 text-white" />
+                      <c.icon className="w-5 h-5 text-white" aria-hidden="true" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">
@@ -120,7 +120,7 @@ export default function Contact() {
               {submitted ? (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
                   <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
-                    <CheckCircle className="w-8 h-8 text-success" />
+                    <CheckCircle className="w-8 h-8 text-success" aria-hidden="true" />
                   </div>
                   <h3 className="font-heading text-2xl font-bold text-foreground mb-2">
                     {t("Message Sent!", "Ujumbe Umetumwa!", lang)}
@@ -140,20 +140,22 @@ export default function Contact() {
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-1.5 block">
+                      <label htmlFor="contact-name" className="text-sm font-medium text-foreground mb-1.5 block">
                         {t("Full Name", "Jina Kamili", lang)} *
                       </label>
                       <input
+                        id="contact-name"
                         required
                         type="text"
                         className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-1.5 block">
+                      <label htmlFor="contact-email" className="text-sm font-medium text-foreground mb-1.5 block">
                         {t("Email", "Barua Pepe", lang)} *
                       </label>
                       <input
+                        id="contact-email"
                         required
                         type="email"
                         className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
@@ -161,22 +163,24 @@ export default function Contact() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-1.5 block">
-                      {t("Phone Number", "Nambari ya Simu", lang)}
-                    </label>
-                    <input
-                      type="tel"
-                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                    />
+                    <label htmlFor="contact-phone" className="text-sm font-medium text-foreground mb-1.5 block">
+                        {t("Phone Number", "Nambari ya Simu", lang)}
+                      </label>
+                      <input
+                        id="contact-phone"
+                        type="tel"
+                        className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+                      />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-1.5 block">
-                      {t("Subject", "Somo", lang)} *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                    >
+                    <label htmlFor="contact-subject" className="text-sm font-medium text-foreground mb-1.5 block">
+                        {t("Subject", "Somo", lang)} *
+                      </label>
+                      <select
+                        id="contact-subject"
+                        required
+                        className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+                      >
                       <option value="">
                         {t("Select a topic", "Chagua mada", lang)}
                       </option>
@@ -198,20 +202,21 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-1.5 block">
-                      {t("Message", "Ujumbe", lang)} *
-                    </label>
-                    <textarea
-                      required
-                      rows={5}
-                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm resize-none"
-                    />
+                    <label htmlFor="contact-message" className="text-sm font-medium text-foreground mb-1.5 block">
+                        {t("Message", "Ujumbe", lang)} *
+                      </label>
+                      <textarea
+                        id="contact-message"
+                        required
+                        rows={5}
+                        className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm resize-none"
+                      />
                   </div>
                   <button
                     type="submit"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 gradient-primary text-white font-medium rounded-lg hover:opacity-90 transition-all shadow-lg shadow-primary/20"
                   >
-                    <Send className="w-4 h-4" />
+                    <Send className="w-4 h-4" aria-hidden="true" />
                     {t("Send Message", "Tuma Ujumbe", lang)}
                   </button>
                 </form>

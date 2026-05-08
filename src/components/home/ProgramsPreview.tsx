@@ -18,7 +18,7 @@ export default function ProgramsPreview() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-2">
+          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">
             {t("Academic Programs", "Programu za Kitaaluma", lang)}
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
@@ -39,7 +39,7 @@ export default function ProgramsPreview() {
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
-                <Atom className="w-6 h-6 text-white" />
+                <Atom className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="font-heading text-xl font-bold text-foreground">
@@ -77,7 +77,7 @@ export default function ProgramsPreview() {
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                <BookText className="w-6 h-6 text-accent-foreground" />
+                <BookText className="w-6 h-6 text-accent-foreground" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="font-heading text-xl font-bold text-foreground">

@@ -53,14 +53,14 @@ export default function AlumniSection() {
               transition={{ delay: i * 0.1 }}
               className="glass rounded-xl p-6 relative"
             >
-              <Star className="w-8 h-8 text-accent/30 absolute top-4 right-4" />
+              <Star className="w-8 h-8 text-accent/30 absolute top-4 right-4" aria-hidden="true" />
               <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mb-4">
                 <span className="text-white font-heading text-xl font-bold">
                   {story.name.split(" ").slice(-1)[0][0]}
                 </span>
               </div>
               <p className="text-muted-foreground italic text-sm leading-relaxed mb-4">
-                "{t(story.quote, story.quoteSw, lang)}"
+                &ldquo;{t(story.quote, story.quoteSw, lang)}&rdquo;
               </p>
               <div>
                 <p className="font-heading text-lg font-bold text-foreground">
@@ -83,7 +83,7 @@ export default function AlumniSection() {
           className="glass rounded-2xl p-8 max-w-2xl mx-auto text-center"
         >
           <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-            <Heart className="w-7 h-7 text-accent" />
+            <Heart className="w-7 h-7 text-accent" aria-hidden="true" />
           </div>
           <h3 className="font-heading text-2xl font-bold text-foreground mb-2">
             {t("Support Bululwe", "Saidia Bululwe", lang)}
@@ -106,7 +106,14 @@ export default function AlumniSection() {
                 {t("Goal", "Lengo", lang)}: KES 5M
               </span>
             </div>
-            <div className="h-3 rounded-full bg-muted overflow-hidden">
+            <div
+              className="h-3 rounded-full bg-muted overflow-hidden"
+              role="progressbar"
+              aria-valuenow={48}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={t("Fundraising progress: 48 percent", "Maendeleo ya ukusanyaji: asilimia 48", lang)}
+            >
               <div className="h-full w-[48%] rounded-full bg-gradient-to-r from-secondary to-accent" />
             </div>
             <p className="text-xs text-muted-foreground mt-1">

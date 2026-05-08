@@ -28,6 +28,7 @@ export default function StaffDirectory() {
             <button
               key={d}
               onClick={() => setFilter(d)}
+              aria-pressed={filter === d}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                 filter === d
                   ? "gradient-primary text-white shadow-md"
@@ -50,7 +51,7 @@ export default function StaffDirectory() {
               className="glass rounded-xl p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mb-4 mx-auto">
-                <User className="w-6 h-6 text-white" />
+                <User className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
               <div className="text-center">
                 <h4 className="font-heading text-lg font-bold text-foreground">
@@ -65,11 +66,11 @@ export default function StaffDirectory() {
               </div>
               <div className="mt-4 pt-4 border-t border-border space-y-2">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Clock className="w-3.5 h-3.5" />
+                  <Clock className="w-3.5 h-3.5" aria-hidden="true" />
                   {staff.hours}
                 </div>
                 <button className="w-full flex items-center justify-center gap-2 text-xs font-medium text-primary hover:bg-primary/5 py-2 rounded-lg transition-colors">
-                  <Mail className="w-3.5 h-3.5" />
+                  <Mail className="w-3.5 h-3.5" aria-hidden="true" />
                   {t("Send Message", "Tuma Ujumbe", lang)}
                 </button>
               </div>

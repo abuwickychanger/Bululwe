@@ -33,13 +33,13 @@ export default function CTASection() {
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-accent-foreground font-semibold rounded-xl hover:opacity-90 transition-all shadow-lg"
           >
             {t("Apply for Admission", "Omba Udahili", lang)}
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
           <a
             href="tel:+254700000000"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-white/15 backdrop-blur-sm text-white font-medium rounded-xl border border-white/25 hover:bg-white/25 transition-all"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-4 h-4" aria-hidden="true" />
             {t("Call Us", "Tupigie Simu", lang)}
           </a>
         </div>

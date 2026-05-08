@@ -120,7 +120,7 @@ export default function Academics() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
-                  <Atom className="w-6 h-6 text-white" />
+                  <Atom className="w-6 h-6 text-white" aria-hidden="true" />
                 </div>
                 <h3 className="font-heading text-2xl font-bold text-foreground">
                   STEM & Sciences
@@ -151,7 +151,7 @@ export default function Academics() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                  <BookText className="w-6 h-6 text-accent-foreground" />
+                  <BookText className="w-6 h-6 text-accent-foreground" aria-hidden="true" />
                 </div>
                 <h3 className="font-heading text-2xl font-bold text-foreground">
                   {t("Humanities", "Sanaa", lang)}
@@ -188,6 +188,7 @@ export default function Academics() {
               <button
                 key={cat}
                 onClick={() => setCalFilter(cat)}
+                aria-pressed={calFilter === cat}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   calFilter === cat
                     ? "gradient-primary text-white shadow-md"
@@ -281,7 +282,7 @@ export default function Academics() {
           {/* Download Prospectus */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-3 glass rounded-xl px-8 py-5">
-              <Download className="w-6 h-6 text-primary" />
+              <Download className="w-6 h-6 text-primary" aria-hidden="true" />
               <div className="text-left">
                 <p className="font-semibold text-foreground">
                   {t("School Prospectus", "Muhtasari wa Shule", lang)}
@@ -311,7 +312,7 @@ export default function Academics() {
             </h3>
             <div className="max-w-2xl mx-auto mb-6">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
                 <input
                   type="text"
                   value={faqSearch}
@@ -321,6 +322,7 @@ export default function Academics() {
                     "Tafuta maswali...",
                     lang,
                   )}
+                  aria-label={t("Search questions", "Tafuta maswali", lang)}
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card focus:outline-none focus:ring-2 focus:ring-ring text-sm"
                 />
               </div>

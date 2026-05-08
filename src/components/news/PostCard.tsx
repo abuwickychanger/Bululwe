@@ -33,11 +33,11 @@ export default function PostCard({ post }: { post: Post }) {
         <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border pt-4">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
-              <Calendar className="w-3.5 h-3.5" />
+              <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
               {post.date}
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
+              <Clock className="w-3.5 h-3.5" aria-hidden="true" />
               {post.readTime}
             </span>
           </div>
@@ -46,7 +46,7 @@ export default function PostCard({ post }: { post: Post }) {
             className="flex items-center gap-1 text-blue-600 font-medium hover:underline"
           >
             {t("Read More", "Soma Zaidi", lang)}
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
         </div>
       </div>

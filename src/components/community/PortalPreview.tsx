@@ -69,7 +69,7 @@ export default function PortalPreview() {
             className="glass rounded-2xl p-8"
           >
             <div className="flex items-center gap-2 mb-6">
-              <Shield className="w-5 h-5 text-secondary" />
+              <Shield className="w-5 h-5 text-secondary" aria-hidden="true" />
               <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
                 {t("Secure Login", "Ingia kwa Usalama", lang)}
               </span>
@@ -77,12 +77,13 @@ export default function PortalPreview() {
 
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">
+                <label htmlFor="portal-id" className="text-sm font-medium text-foreground mb-1.5 block">
                   {t("Student/Parent ID", "Kitambulisho", lang)}
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
                   <input
+                    id="portal-id"
                     type="text"
                     placeholder="BMS/2026/001"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
@@ -90,24 +91,27 @@ export default function PortalPreview() {
                 </div>
               </div>
               <div>
-                <label className="text-sm font-medium text-foreground mb-1.5 block">
+                <label htmlFor="portal-password" className="text-sm font-medium text-foreground mb-1.5 block">
                   {t("Password", "Nywila", lang)}
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
                   <input
+                    id="portal-password"
                     type={showPass ? "text" : "password"}
                     placeholder="••••••••"
                     className="w-full pl-10 pr-10 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
                   />
                   <button
                     onClick={() => setShowPass(!showPass)}
+                    aria-label={showPass ? "Hide password" : "Show password"}
+                    aria-controls="portal-password"
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                   >
                     {showPass ? (
-                      <EyeOff className="w-4 h-4" />
+                      <EyeOff className="w-4 h-4" aria-hidden="true" />
                     ) : (
-                      <Eye className="w-4 h-4" />
+                      <Eye className="w-4 h-4" aria-hidden="true" />
                     )}
                   </button>
                 </div>
@@ -122,12 +126,13 @@ export default function PortalPreview() {
                     lang,
                   )}
                 </p>
-                <div className="flex gap-2">
+                <div className="flex gap-2" role="group" aria-label={t("Two-factor authentication code", "Msimbo wa uthibitishaji", lang)}>
                   {[1, 2, 3, 4, 5, 6].map((i) => (
                     <input
                       key={i}
                       type="text"
                       maxLength={1}
+                      aria-label={`${t("Digit", "Nambari", lang)} ${i}`}
                       className="w-9 h-10 text-center rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm font-bold"
                     />
                   ))}
@@ -153,7 +158,7 @@ export default function PortalPreview() {
                 className="glass rounded-xl p-5 flex items-start gap-4 hover:shadow-md transition-all"
               >
                 <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0">
-                  <f.icon className="w-5 h-5 text-white" />
+                  <f.icon className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">{f.title}</h4>

@@ -4,6 +4,9 @@ import { MapPin, Phone, Mail, Clock, ExternalLink } from 'lucide-react';
 import { SCHOOL_NAME, IMAGES, SCHOOL_LOCATION } from '@/lib/constants';
 import { useLanguage, t } from '@/lib/LanguageContext';
 
+const SCHOOL_PHONE = "+254 700 000 000";
+const SCHOOL_EMAIL = "info@bululwe.sc.ke";
+
 export default function Footer() {
   const { lang } = useLanguage();
   return (
@@ -12,7 +15,7 @@ export default function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <img src={IMAGES.crest} alt="Crest" className="w-12 h-12 object-contain" />
+              <img src={IMAGES.crest} alt="School Crest" className="w-12 h-12 object-contain" />
               <div>
                 <p className="font-heading text-lg font-bold">{SCHOOL_NAME}</p>
                 <p className="text-xs text-white/60">{t("Knowledge is Power", "Elimu ni Nguvu", lang)}</p>
@@ -42,7 +45,7 @@ export default function Footer() {
                     href={link.to}
                     className="text-sm text-white/70 hover:text-white transition-colors duration-300 flex items-center gap-1.5"
                   >
-                    <ExternalLink className="w-3 h-3" />
+                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
                     {link.label}
                   </Link>
                 </li>
@@ -54,19 +57,19 @@ export default function Footer() {
             <h4 className="font-heading text-lg font-semibold mb-4">{t("Contact Us", "Wasiliana Nasi", lang)}</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-sm text-white/70">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-blue-200" />
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-blue-200" aria-hidden="true" />
                 {SCHOOL_LOCATION}
               </li>
               <li className="flex items-center gap-2.5 text-sm text-white/70">
-                <Phone className="w-4 h-4 shrink-0 text-blue-200" />
-                +254 700 000 000
+                <Phone className="w-4 h-4 shrink-0 text-blue-200" aria-hidden="true" />
+                <a href={`tel:${SCHOOL_PHONE.replace(/\s/g, '')}`} className="hover:text-white transition-colors">{SCHOOL_PHONE}</a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-white/70">
-                <Mail className="w-4 h-4 shrink-0 text-blue-200" />
-                info@bululwe.sc.ke
+                <Mail className="w-4 h-4 shrink-0 text-blue-200" aria-hidden="true" />
+                <a href={`mailto:${SCHOOL_EMAIL}`} className="hover:text-white transition-colors">{SCHOOL_EMAIL}</a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-white/70">
-                <Clock className="w-4 h-4 shrink-0 text-blue-200" />
+                <Clock className="w-4 h-4 shrink-0 text-blue-200" aria-hidden="true" />
                 Mon-Fri: 7:30 AM - 5:00 PM
               </li>
             </ul>
@@ -79,11 +82,13 @@ export default function Footer() {
             </p>
             <div className="flex gap-2">
               <input
+                id="footer-email"
                 type="email"
                 placeholder={t("Your email", "Barua pepe yako", lang)}
-                className="flex-1 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-blue-200"
+                aria-label={t("Email address for newsletter", "Barua pepe kwa jarida", lang)}
+                className="flex-1 min-h-[44px] px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-sm text-white placeholder:text-white/40 focus:outline-2 focus:outline-blue-200 focus:outline-offset-2"
               />
-              <button className="px-4 py-2 bg-blue-200 text-blue-900 text-sm font-medium rounded-lg hover:bg-white transition-opacity">
+              <button className="min-h-[44px] min-w-[44px] px-4 py-2 bg-blue-200 text-blue-900 text-sm font-medium rounded-lg hover:bg-white transition-opacity">
                 {t("Join", "Jiunge", lang)}
               </button>
             </div>

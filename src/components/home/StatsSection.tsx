@@ -27,7 +27,7 @@ function AnimatedCounter({ target, suffix, inView }: { target: number; suffix: s
   }, [inView, target]);
 
   return (
-    <span>
+    <span aria-live="polite" aria-atomic="true">
       {count}
       {suffix}
     </span>
@@ -54,7 +54,7 @@ export default function StatsSection() {
                 className="text-center"
               >
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl gradient-primary mb-3">
-                  <Icon className="w-5 h-5 text-white" />
+                  <Icon className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <p className="font-heading text-3xl md:text-4xl font-bold text-primary">
                   <AnimatedCounter

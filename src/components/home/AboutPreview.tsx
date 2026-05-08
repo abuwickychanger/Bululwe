@@ -69,7 +69,7 @@ export default function AboutPreview() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-2">
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">
               {t("About Our School", "Kuhusu Shule Yetu", lang)}
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-5">
@@ -90,12 +90,12 @@ export default function AboutPreview() {
               {pillars.map((pillar, i) => (
                 <div key={pillar.title} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shrink-0">
-                    <pillar.icon className="w-5 h-5 text-white" />
+                    <pillar.icon className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">
+                    <h3 className="font-semibold text-foreground">
                       {t(pillar.title, pillar.titleSw, lang)}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-muted-foreground">
                       {t(pillar.desc, pillar.descSw, lang)}
                     </p>
@@ -109,7 +109,7 @@ export default function AboutPreview() {
               className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300"
             >
               {t("Learn More About Us", "Jifunze Zaidi Kuhusu Sisi", lang)}
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </motion.div>
         </div>

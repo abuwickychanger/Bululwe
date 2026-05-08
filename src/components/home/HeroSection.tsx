@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ChevronRight, Play, ArrowRight } from "lucide-react";
+import { Play, Pause, ArrowRight } from "lucide-react";
 import {
   HERO_IMAGES,
   IMAGES,
@@ -13,13 +13,17 @@ import { useLanguage, t } from "@/lib/LanguageContext";
 export default function HeroSection() {
   const { lang } = useLanguage();
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const timer = setInterval(() => {
       setCurrent((c) => (c + 1) % HERO_IMAGES.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [paused]);
+
+  const togglePause = useCallback(() => setPaused((p) => !p), []);
 
   return (
     <section className="relative h-[85vh] min-h-[600px] max-h-[900px] overflow-hidden">
@@ -35,7 +39,7 @@ export default function HeroSection() {
         >
           <img
             src={HERO_IMAGES[current]}
-            alt="Bululwe Campus"
+            alt=""
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -89,31 +93,40 @@ export default function HeroSection() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-accent/30"
             >
               {t("Explore Programs", "Gundua Programu", lang)}
-              <ArrowRight className="w-4 h-4" />
+               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
             <Link
               href="/campus"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/15 backdrop-blur-sm text-white font-medium rounded-xl border border-white/25 hover:bg-white/25 transition-all duration-300"
             >
-              <Play className="w-4 h-4" />
+               <Play className="w-4 h-4" aria-hidden="true" />
               {t("Virtual Tour", "Ziara ya Mtandaoni", lang)}
             </Link>
           </motion.div>
         </div>
       </div>
 
-      {/* Carousel Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+      {/* Carousel Indicators + Pause */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
         {HERO_IMAGES.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === current ? "w-10 bg-accent" : "w-1.5 bg-white/40"
-            }`}
+            className={`relative flex items-center justify-center min-w-[44px] min-h-[44px]`}
             aria-label={`Slide ${i + 1}`}
-          />
+          >
+            <span className={`block rounded-full transition-all duration-500 ${
+              i === current ? "w-10 h-1.5 bg-accent" : "w-1.5 h-1.5 bg-white/40"
+            }`} />
+          </button>
         ))}
+        <button
+          onClick={togglePause}
+          aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 hover:bg-white/25 transition-all duration-300"
+        >
+          {paused ? <Play className="w-4 h-4 text-white" aria-hidden="true" /> : <Pause className="w-4 h-4 text-white" aria-hidden="true" />}
+        </button>
       </div>
 
       {/* School Motto badge */}
@@ -123,7 +136,7 @@ export default function HeroSection() {
             {t("Our Motto", "Kauli Mbiu Yetu", lang)}
           </p>
           <p className="font-heading text-lg font-semibold italic">
-            "{t(SCHOOL_MOTTO, "Elimu ni Nguvu", lang)}"
+            &ldquo;{t(SCHOOL_MOTTO, "Elimu ni Nguvu", lang)}&rdquo;
           </p>
         </div>
       </div>

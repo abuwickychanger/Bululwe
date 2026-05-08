@@ -92,7 +92,7 @@ export default function VirtualTour() {
                     : "glass hover:bg-primary/5"
                 }`}
               >
-                <MapPin className="w-4 h-4 shrink-0" />
+                <MapPin className="w-4 h-4 shrink-0" aria-hidden="true" />
                 <span className="font-medium text-sm">
                   {t(ts.name, ts.nameSw, lang)}
                 </span>
@@ -118,15 +118,18 @@ export default function VirtualTour() {
 
               {/* Hotspots */}
               {spot.hotspots.map((hp, i) => (
-                <div
+                <button
                   key={i}
                   className="absolute"
                   style={{ left: `${hp.x}%`, top: `${hp.y}%` }}
                   onMouseEnter={() => setHoveredHotspot(i)}
                   onMouseLeave={() => setHoveredHotspot(null)}
+                  onFocus={() => setHoveredHotspot(i)}
+                  onBlur={() => setHoveredHotspot(null)}
+                  aria-label={hp.label}
                 >
                   <div className="w-6 h-6 rounded-full bg-accent/80 border-2 border-white flex items-center justify-center cursor-pointer animate-pulse">
-                    <Eye className="w-3 h-3 text-white" />
+                    <Eye className="w-3 h-3 text-white" aria-hidden="true" />
                   </div>
                   <AnimatePresence>
                     {hoveredHotspot === i && (
@@ -140,21 +143,23 @@ export default function VirtualTour() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </button>
               ))}
 
               {/* Nav Arrows */}
               <button
                 onClick={prev}
+                aria-label={t("Previous location", "Eneo la awali", lang)}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-5 h-5" aria-hidden="true" />
               </button>
               <button
                 onClick={next}
+                aria-label={t("Next location", "Eneo linalofuata", lang)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-5 h-5" aria-hidden="true" />
               </button>
 
               {/* Info Overlay */}

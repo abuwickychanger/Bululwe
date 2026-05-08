@@ -45,6 +45,7 @@ export default function GallerySection() {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
+              aria-pressed={filter === cat}
               className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-all duration-300 ${
                 filter === cat
                   ? "gradient-primary text-white shadow-md"
@@ -69,6 +70,10 @@ export default function GallerySection() {
                 transition={{ duration: 0.3 }}
                 className="group relative rounded-xl overflow-hidden cursor-pointer aspect-[4/3]"
                 onClick={() => setLightbox(item)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLightbox(item); } }}
+                role="button"
+                tabIndex={0}
+                aria-label={`${t("View", "Tazama", lang)} ${item.title}`}
               >
                 <img
                   src={item.src}
@@ -85,7 +90,7 @@ export default function GallerySection() {
                   </p>
                 </div>
                 <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ZoomIn className="w-4 h-4 text-white" />
+                  <ZoomIn className="w-4 h-4 text-white" aria-hidden="true" />
                 </div>
               </motion.div>
             ))}
@@ -95,15 +100,22 @@ export default function GallerySection() {
         {/* Lightbox */}
         <AnimatePresence>
           {lightbox && (
-            <motion.div
+              <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
               onClick={() => setLightbox(null)}
+              tabIndex={-1}
             >
-              <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-                <X className="w-5 h-5" />
+              <button
+                autoFocus
+                onClick={() => setLightbox(null)}
+                onKeyDown={(e) => { if (e.key === 'Escape') setLightbox(null); }}
+                aria-label={t("Close lightbox", "Funga", lang)}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              >
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
               <motion.img
                 initial={{ scale: 0.8 }}

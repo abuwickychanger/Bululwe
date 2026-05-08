@@ -37,10 +37,10 @@ export default function CommentSection({
 
   return (
     <div>
-      <h3 className="font-heading text-xl font-bold text-foreground mb-6 flex items-center gap-2">
-        <MessageSquare className="w-5 h-5" />
+      <h2 className="font-heading text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+        <MessageSquare className="w-5 h-5" aria-hidden="true" />
         {t("Comments", "Maoni", lang)} ({comments.length})
-      </h3>
+      </h2>
 
       <div className="space-y-4 mb-8">
         <AnimatePresence>
@@ -69,10 +69,12 @@ export default function CommentSection({
       </div>
 
       <form onSubmit={handleSubmit} className="glass rounded-xl p-5 space-y-4">
-        <h4 className="font-heading text-lg font-bold text-foreground">
+        <h3 className="font-heading text-lg font-bold text-foreground">
           {t("Leave a Comment", "Acha Maoni", lang)}
-        </h4>
+        </h3>
+        <label htmlFor="comment-name" className="sr-only">{t("Your Name", "Jina Lako", lang)}</label>
         <input
+          id="comment-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -80,7 +82,9 @@ export default function CommentSection({
           required
           className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring text-sm"
         />
+        <label htmlFor="comment-body" className="sr-only">{t("Write your comment...", "Andika maoni yako...", lang)}</label>
         <textarea
+          id="comment-body"
           value={body}
           onChange={(e) => setBody(e.target.value)}
           placeholder={t("Write your comment...", "Andika maoni yako...", lang)}
@@ -92,7 +96,7 @@ export default function CommentSection({
           type="submit"
           className="inline-flex items-center gap-2 px-6 py-2.5 gradient-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-all"
         >
-          <Send className="w-4 h-4" />
+          <Send className="w-4 h-4" aria-hidden="true" />
           {t("Post Comment", "Tuma Maoni", lang)}
         </button>
       </form>

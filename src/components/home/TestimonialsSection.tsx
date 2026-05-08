@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { TESTIMONIALS } from "@/lib/constants";
 import { useLanguage, t } from "@/lib/LanguageContext";
 
@@ -19,8 +19,9 @@ export default function TestimonialsSection() {
     return () => clearInterval(timer);
   }, [paused]);
 
-  const prev = () => setCurrent((c) => (c - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
-  const next = () => setCurrent((c) => (c + 1) % TESTIMONIALS.length);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + TESTIMONIALS.length) % TESTIMONIALS.length), []);
+  const next = useCallback(() => setCurrent((c) => (c + 1) % TESTIMONIALS.length), []);
+  const togglePause = useCallback(() => setPaused((p) => !p), []);
 
   return (
     <section className="py-20 md:py-28 bg-gradient-to-b from-muted/30 to-white px-4 sm:px-6" ref={ref}>
@@ -30,7 +31,7 @@ export default function TestimonialsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-2">
+          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">
             {t("Testimonials", "Shuhuda", lang)}
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
@@ -46,6 +47,7 @@ export default function TestimonialsSection() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
+          <div aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
@@ -55,7 +57,7 @@ export default function TestimonialsSection() {
               transition={{ duration: 0.35 }}
               className="glass rounded-2xl p-8 md:p-10 relative"
             >
-              <Quote className="absolute top-4 left-4 w-10 h-10 text-primary/10" />
+              <Quote className="absolute top-4 left-4 w-10 h-10 text-primary/10" aria-hidden="true" />
               <div className="relative">
                 <p className="text-foreground/85 text-base md:text-lg leading-relaxed italic mb-6">
                   &ldquo;{t(TESTIMONIALS[current].quote, TESTIMONIALS[current].quoteSw, lang)}&rdquo;
@@ -76,35 +78,45 @@ export default function TestimonialsSection() {
               </div>
             </motion.div>
           </AnimatePresence>
+          </div>
 
           <div className="flex items-center justify-center gap-3 mt-8">
             <button
               onClick={prev}
-              className="p-2 rounded-full border border-border hover:bg-primary/5 hover:border-primary/30 transition-colors"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full border border-border hover:bg-primary/5 hover:border-primary/30 transition-colors"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-4 h-4 text-foreground/60" />
+              <ChevronLeft className="w-4 h-4 text-foreground/60" aria-hidden="true" />
             </button>
             <div className="flex items-center gap-2">
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === current
-                      ? "bg-primary w-6"
-                      : "bg-foreground/20 hover:bg-foreground/40"
-                  }`}
+                  className="flex items-center justify-center min-w-[44px] min-h-[44px]"
                   aria-label={`Go to testimonial ${i + 1}`}
-                />
+                >
+                  <span className={`block rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "bg-primary w-6 h-2"
+                      : "bg-foreground/20 hover:bg-foreground/40 w-2 h-2"
+                  }`} />
+                </button>
               ))}
             </div>
             <button
               onClick={next}
-              className="p-2 rounded-full border border-border hover:bg-primary/5 hover:border-primary/30 transition-colors"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full border border-border hover:bg-primary/5 hover:border-primary/30 transition-colors"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-4 h-4 text-foreground/60" />
+              <ChevronRight className="w-4 h-4 text-foreground/60" aria-hidden="true" />
+            </button>
+            <button
+              onClick={togglePause}
+              aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full border border-border hover:bg-primary/5 hover:border-primary/30 transition-colors"
+            >
+              {paused ? <Play className="w-4 h-4 text-foreground/60" aria-hidden="true" /> : <Pause className="w-4 h-4 text-foreground/60" aria-hidden="true" />}
             </button>
           </div>
         </div>

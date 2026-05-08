@@ -39,7 +39,7 @@ export default function HouseSystem() {
 
               {i === 0 && (
                 <div className="absolute top-3 right-3">
-                  <Trophy className="w-5 h-5 text-accent" />
+                  <Trophy className="w-5 h-5 text-accent" aria-hidden="true" />
                 </div>
               )}
 
@@ -48,7 +48,7 @@ export default function HouseSystem() {
                   className="w-10 h-10 rounded-lg flex items-center justify-center"
                   style={{ backgroundColor: house.color + "20" }}
                 >
-                  <Star className="w-5 h-5" style={{ color: house.color }} />
+                  <Star className="w-5 h-5" aria-hidden="true" style={{ color: house.color }} />
                 </div>
                 <div>
                   <h4 className="font-heading text-lg font-bold text-foreground">
@@ -69,7 +69,14 @@ export default function HouseSystem() {
                     {house.points}
                   </span>
                 </div>
-                <div className="h-2 rounded-full bg-muted overflow-hidden">
+                <div
+                  className="h-2 rounded-full bg-muted overflow-hidden"
+                  role="progressbar"
+                  aria-valuenow={house.points}
+                  aria-valuemin={0}
+                  aria-valuemax={maxPoints}
+                  aria-label={`${t(house.name, house.nameSw, lang)} ${t("points", "pointi", lang)}`}
+                >
                   <motion.div
                     className="h-full rounded-full"
                     style={{ backgroundColor: house.color }}

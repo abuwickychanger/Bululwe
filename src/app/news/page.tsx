@@ -21,7 +21,7 @@ export default function NewsPage() {
       <section className="relative h-72 md:h-80 overflow-hidden">
         <img
           src={IMAGES.library}
-          alt="News"
+          alt="Bululwe school library reading area"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#002060]/90 via-[#002060]/70 to-[#002060]/40" />
@@ -34,6 +34,7 @@ export default function NewsPage() {
               {t("News & Updates", "Habari na Masasisho", lang)}
             </h1>
           </div>
+          <h2 className="sr-only">{t("News Articles", "Makala za Habari", lang)}</h2>
         </div>
       </section>
 
@@ -44,6 +45,7 @@ export default function NewsPage() {
               <button
                 key={cat.value}
                 onClick={() => setCategory(cat.value)}
+                aria-pressed={category === cat.value}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   category === cat.value
                     ? "gradient-primary text-white shadow-md"

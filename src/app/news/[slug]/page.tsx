@@ -29,7 +29,7 @@ export default function NewsPostPage({
           href="/news"
           className="inline-flex items-center gap-2 text-blue-600 font-medium hover:underline"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4" aria-hidden="true" />
           {t("Back to News", "Rudi kwenye Habari", lang)}
         </Link>
       </div>
@@ -53,7 +53,7 @@ export default function NewsPostPage({
               href="/news"
               className="inline-flex items-center gap-1.5 text-blue-200 hover:text-white text-sm font-medium mb-4 transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               {t("Back to News", "Rudi kwenye Habari", lang)}
             </Link>
             <span className="inline-block text-xs font-medium text-blue-200 bg-white/10 px-3 py-1 rounded-full mb-3">
@@ -64,11 +64,11 @@ export default function NewsPostPage({
             </h1>
             <div className="flex items-center gap-4 mt-4 text-sm text-blue-200">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4" aria-hidden="true" />
                 {post.date}
               </span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" />
+                <Clock className="w-4 h-4" aria-hidden="true" />
                 {post.readTime}
               </span>
             </div>
@@ -88,7 +88,7 @@ export default function NewsPostPage({
 
             {post.tags.length > 0 && (
               <div className="flex flex-wrap items-center gap-2 mt-8 pt-6 border-t border-border">
-                <Tag className="w-4 h-4 text-muted-foreground" />
+                <Tag className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
@@ -110,30 +110,28 @@ export default function NewsPostPage({
 
             {recentPosts.length > 0 && (
               <div>
-                <h3 className="font-heading text-lg font-bold text-foreground mb-4">
+                <h2 className="font-heading text-lg font-bold text-foreground mb-4">
                   {t("Recent Posts", "Machapisho ya Hivi Karibuni", lang)}
-                </h3>
+                </h2>
                 <div className="space-y-4">
                   {recentPosts.map((rp) => (
-                    <div key={rp.slug} className="glass rounded-xl overflow-hidden">
-                      <Link href={`/news/${rp.slug}`}>
+                    <Link key={rp.slug} href={`/news/${rp.slug}`} className="glass rounded-xl overflow-hidden block hover:shadow-md transition-shadow">
+                      <div>
                         <img
                           src={rp.image}
                           alt={rp.title}
                           className="w-full h-32 object-cover"
                         />
-                      </Link>
+                      </div>
                       <div className="p-3">
-                        <Link href={`/news/${rp.slug}`}>
-                          <h4 className="font-heading text-sm font-bold text-foreground hover:text-blue-600 transition-colors">
-                            {t(rp.title, rp.titleSw, lang)}
-                          </h4>
-                        </Link>
+                        <h3 className="font-heading text-sm font-bold text-foreground hover:text-blue-600 transition-colors">
+                          {t(rp.title, rp.titleSw, lang)}
+                        </h3>
                         <p className="text-xs text-muted-foreground mt-1">
                           {rp.date}
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
