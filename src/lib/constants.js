@@ -314,3 +314,41 @@ export const STAFF_DIRECTORY = [
     hours: "Mon-Fri 8:00-15:00",
   },
 ];
+
+export const TESTIMONIALS = [
+  {
+    name: "Faith Akinyi",
+    role: "Form 4 Graduate, 2025",
+    quote: "Bululwe shaped me into a confident and disciplined young woman. The teachers believed in me even when I doubted myself. I scored a B+ and now I'm headed to university to study Medicine.",
+    quoteSw: "Bululwe ilinichagua kuwa mwanamke mwenye ujasiri na nidhamu. Walimu waliniamini hata nilipokuwa na shaka. Nimepata B+ na sasa ninaelekea chuo kikuu kusoma Udaktari.",
+    avatar: "",
+  },
+  {
+    name: "James Omondi",
+    role: "Form 4 Graduate, 2024",
+    quote: "The science lab at Bululwe gave me hands-on experience that made Physics and Chemistry come alive. I'm now pursuing Engineering at the University of Nairobi.",
+    quoteSw: "Maabara ya sayansi Bululwe ilinipa uzoefu wa vitendo uliofanya Fizikia na Kemia kuwa hai. Sasa nasoma Uhandisi katika Chuo Kikuu cha Nairobi.",
+    avatar: "",
+  },
+  {
+    name: "Mary Wanjiku",
+    role: "Parent",
+    quote: "Choosing Bululwe for my daughter was the best decision. The discipline and academic support transformed her grades from average to excellent in just one term.",
+    quoteSw: "Kuchagua Bululwe kwa binti yangu lilikuwa uamuzi bora. Nidhamu na msaada wa kitaaluma ulibadilisha alama zake kutoka wastani hadi bora kwa muhula mmoja tu.",
+    avatar: "",
+  },
+  {
+    name: "Peter Kamau",
+    role: "Form 4 Graduate, 2023",
+    quote: "Bululwe taught me that success is a product of hard work and determination. From humble beginnings, I scored a clean A- and joined Strathmore University.",
+    quoteSw: "Bululwe ilinifundisha kuwa mafanikio ni matokeo ya bidii na dhamira. Kuanzia mwanzo mdogo, nilipata A- safi na kujiunga na Chuo Kikuu cha Strathmore.",
+    avatar: "",
+  },
+  {
+    name: "Sarah Chelangat",
+    role: "Form 3 Student",
+    quote: "The boarding facilities are comfortable and the food is great! But what I love most is the library — it's my favourite place to study and prepare for my exams.",
+    quoteSw: "Mabweni ni mazuri na chakula ni kitamu! Lakini ninachokipenda zaidi ni maktaba — ni mahali napenda kusoma na kujiandaa kwa mitihani yangu.",
+    avatar: "",
+  },
+];
