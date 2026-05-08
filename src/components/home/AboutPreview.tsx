@@ -58,7 +58,7 @@ export default function AboutPreview() {
                 {t("Established", "Imeanzishwa", lang)}
               </p>
               <p className="font-heading text-2xl font-bold text-primary">
-                Since 1990
+                Since 2014
               </p>
             </div>
           </motion.div>

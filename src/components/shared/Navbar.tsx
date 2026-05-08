@@ -2,9 +2,98 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Globe, Bell } from 'lucide-react';
+import {
+  Menu, X, ChevronDown, ChevronRight, Globe, Bell,
+  House, Info, GraduationCap, MapPin, Newspaper, Users, Phone,
+} from 'lucide-react';
 import { IMAGES, NAV_LINKS, SCHOOL_NAME_SHORT, ANNOUNCEMENTS } from '@/lib/constants';
 import { useLanguage, t } from '@/lib/LanguageContext';
+
+const NAV_ICONS: Record<string, React.ReactNode> = {
+  Home: <House className="w-5 h-5" />,
+  About: <Info className="w-5 h-5" />,
+  Academics: <GraduationCap className="w-5 h-5" />,
+  "Campus Life": <MapPin className="w-5 h-5" />,
+  News: <Newspaper className="w-5 h-5" />,
+  Community: <Users className="w-5 h-5" />,
+  Contact: <Phone className="w-5 h-5" />,
+};
+
+function MobileNavLink({
+  link,
+  pathname,
+  lang,
+}: {
+  link: (typeof NAV_LINKS)[number];
+  pathname: string;
+  lang: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const hasChildren = !!link.children;
+  const isActive = pathname === link.path;
+
+  return (
+    <div className="border-b border-gray-100 last:border-0">
+      <div className="flex items-center">
+        <Link
+          href={link.path}
+          className={`flex items-center gap-3 flex-1 py-3 text-sm font-medium transition-colors ${
+            isActive
+              ? 'text-primary'
+              : 'text-gray-700 hover:text-primary'
+          }`}
+        >
+          {NAV_ICONS[link.label] && (
+            <span className="shrink-0">{NAV_ICONS[link.label]}</span>
+          )}
+          {t(link.label, link.labelSw, lang)}
+        </Link>
+        {hasChildren && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="p-2 text-gray-400 hover:text-primary transition-colors"
+            aria-label="Toggle submenu"
+          >
+            <ChevronRight
+              className={`w-5 h-5 transition-transform duration-200 ${
+                expanded ? 'rotate-90' : ''
+              }`}
+            />
+          </button>
+        )}
+      </div>
+      {hasChildren && (
+        <AnimatePresence initial={false}>
+          {expanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="pl-8 pb-3 space-y-1">
+                {link.children!.map((child) => (
+                  <Link
+                    key={child.path}
+                    href={child.path}
+                    className={`block py-1.5 text-sm transition-colors ${
+                      pathname === child.path
+                        ? 'text-primary font-medium'
+                        : 'text-gray-500 hover:text-primary'
+                    }`}
+                  >
+                    {t(child.label, child.labelSw, lang)}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const { lang, toggle } = useLanguage();
@@ -148,59 +237,68 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-border overflow-hidden"
-          >
-            <div className="px-4 py-4 space-y-1">
-              {NAV_LINKS.map((link, idx) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+            {/* Drawer */}
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              className="fixed top-0 left-0 z-50 h-screen w-4/5 max-w-sm bg-white shadow-xl lg:hidden overflow-y-auto"
+            >
+              <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+                  <img src={IMAGES.crest} alt="School Crest" className="w-9 h-9 object-contain" />
+                  <span className="font-heading text-base font-bold text-primary">{SCHOOL_NAME_SHORT}</span>
+                </Link>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-1.5 rounded-lg text-gray-400 hover:text-foreground hover:bg-gray-100 transition-colors"
+                  aria-label="Close menu"
                 >
-                  <Link
-                    href={link.path}
-                    className="block px-4 py-3 rounded-lg text-foreground/80 hover:bg-primary/5 hover:text-primary font-medium transition-all"
-                  >
-                    {t(link.label, link.labelSw, lang)}
-                  </Link>
-                  {link.children && (
-                    <div className="pl-6 space-y-1">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.path}
-                          href={child.path}
-                          className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary transition-all"
-                        >
-                          {t(child.label, child.labelSw, lang)}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05 }}
-                className="pt-2"
-              >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="px-6 py-2">
+                {NAV_LINKS.map((link) => (
+                  <MobileNavLink
+                    key={link.path}
+                    link={link}
+                    pathname={pathname}
+                    lang={lang}
+                  />
+                ))}
+              </div>
+              <div className="px-6 py-4 border-t border-gray-100 space-y-3">
+                <button
+                  onClick={toggle}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg text-sm font-medium border border-border hover:bg-primary/5 transition-all duration-300"
+                >
+                  <Globe className="w-4 h-4" />
+                  {lang === 'en' ? 'Kiswahili' : 'English'}
+                </button>
                 <Link
                   href="/contact"
-                  className="block text-center px-4 py-3 gradient-primary text-white font-medium rounded-lg"
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-center px-4 py-2.5 gradient-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-all duration-300"
                 >
                   {t("Enroll Now", "Jisajili Sasa", lang)}
                 </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
     </nav>
