@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { IMAGES, NAV_LINKS, SCHOOL_NAME_SHORT, ANNOUNCEMENTS } from '@/lib/constants';
 import { useLanguage, t } from '@/lib/LanguageContext';
+import type { Lang } from '@/lib/LanguageContext';
 
 const NAV_ICONS: Record<string, React.ReactNode> = {
   Home: <House className="w-5 h-5" />,
@@ -26,7 +27,7 @@ function MobileNavLink({
 }: {
   link: (typeof NAV_LINKS)[number];
   pathname: string;
-  lang: string;
+  lang: Lang;
 }) {
   const [expanded, setExpanded] = useState(false);
   const hasChildren = !!link.children;
