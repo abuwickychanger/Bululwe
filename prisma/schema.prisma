@@ -1,10 +1,15 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
+  // Keep your custom output if your project structure specifically requires it
   output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
+  // DATABASE_URL should be your Neon pooled connection string
+  url       = env("DATABASE_URL")
+  // DIRECT_URL should be your Neon direct connection string (no -pooler in URL)
+  directUrl = env("DIRECT_URL")
 }
 
 model Download {
@@ -23,40 +28,43 @@ model Announcement {
   id        String   @id @default(cuid())
   titleEn   String   @map("title_en")
   titleSw   String   @map("title_sw")
-  contentEn String?  @map("content_en")
-  contentSw String?  @map("content_sw")
-  priority  String   @default("normal")
+  contentEn String?  @map("content_en") @db.Text
+  contentSw String?  @map("content_sw") @db.Text
+  priority  String   @default("normal") // normal, high, urgent
   isActive  Boolean  @default(true) @map("is_active")
+  isBreaking Boolean @default(false) @map("is_breaking") // For the top UI ticker
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("announcements")
 }
 
 model Staff {
-  id         String  @id @default(cuid())
-  name       String
-  roleEn     String  @map("role_en")
-  roleSw     String  @map("role_sw")
-  department String
-  bioEn      String? @map("bio_en")
-  bioSw      String? @map("bio_sw")
-  imageUrl   String? @map("image_url")
-  email      String?
-  hours      String
-  sortOrder  Int     @default(0) @map("sort_order")
-  createdAt  DateTime @default(now()) @map("created_at")
+  id          String   @id @default(cuid())
+  name        String
+  roleEn      String   @map("role_en")
+  roleSw      String   @map("role_sw")
+  department  String
+  bioEn       String?  @map("bio_en") @db.Text
+  bioSw       String?  @map("bio_sw") @db.Text
+  imageUrl    String?  @map("image_url")
+  email       String?
+  hours       String?
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("staff")
 }
 
 model FeeStructure {
-  id           String @id @default(cuid())
-  formLevel    String @map("form_level")
-  category     String
-  amount       Float
-  academicYear String @default("2026") @map("academic_year")
+  id           String   @id @default(cuid())
+  labelEn      String   @map("label_en") // e.g., "Tuition Fee"
+  labelSw      String   @map("label_sw") // e.g., "Ada ya Masomo"
+  formLevel    String   @map("form_level")
+  category     String   // e.g., "Day Scholar" or "Boarding"
+  amount       Decimal  @db.Decimal(10, 2) // Changed from Float for financial accuracy
+  academicYear String   @default("2026") @map("academic_year")
   createdAt    DateTime @default(now()) @map("created_at")
 
-  @@unique([formLevel, category, academicYear])
+  @@unique([labelEn, formLevel, category, academicYear])
   @@map("fee_structure")
 }
