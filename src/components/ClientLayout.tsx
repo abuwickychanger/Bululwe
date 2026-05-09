@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { LanguageProvider, useLanguage } from "@/lib/LanguageContext";
+import { useLanguage } from "@/lib/LanguageContext";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 
@@ -19,13 +19,13 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   return (
-    <LanguageProvider>
+    <>
       <LangUpdater />
       <div className="flex min-h-full flex-col">
         <Navbar />
         <main id="main-content" className="flex-1" tabIndex={-1}>{children}</main>
         <Footer />
       </div>
-    </LanguageProvider>
+    </>
   );
 }

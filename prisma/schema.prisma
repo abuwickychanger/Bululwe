@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Download {
+  id        String   @id @default(cuid())
+  nameEn    String   @map("name_en")
+  nameSw    String   @map("name_sw")
+  category  String
+  fileUrl   String   @map("file_url")
+  fileSize  String   @map("file_size")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("downloads")
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  titleEn   String   @map("title_en")
+  titleSw   String   @map("title_sw")
+  contentEn String?  @map("content_en")
+  contentSw String?  @map("content_sw")
+  priority  String   @default("normal")
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("announcements")
+}
+
+model Staff {
+  id         String  @id @default(cuid())
+  name       String
+  roleEn     String  @map("role_en")
+  roleSw     String  @map("role_sw")
+  department String
+  bioEn      String? @map("bio_en")
+  bioSw      String? @map("bio_sw")
+  imageUrl   String? @map("image_url")
+  email      String?
+  hours      String
+  sortOrder  Int     @default(0) @map("sort_order")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("staff")
+}
+
+model FeeStructure {
+  id           String @id @default(cuid())
+  formLevel    String @map("form_level")
+  category     String
+  amount       Float
+  academicYear String @default("2026") @map("academic_year")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@unique([formLevel, category, academicYear])
+  @@map("fee_structure")
+}

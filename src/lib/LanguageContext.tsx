@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useState } from "react";
 
 export type Lang = "en" | "sw";
@@ -24,7 +26,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
 export function useLanguage(): LanguageContextValue {
   const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
+  if (!ctx) {
+    if (typeof window === "undefined") {
+      return { lang: "en", toggle: () => {}, isSwahili: false };
+    }
+    throw new Error("useLanguage must be used within LanguageProvider");
+  }
   return ctx;
 }
 

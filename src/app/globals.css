@@ -166,3 +166,15 @@
 @theme inline {
   --color-success: oklch(0.5 0.2 145);
 }
+
+@utility glass-db {
+  background: oklch(1 0 0 / 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid oklch(1 1 1 / 0.2);
+}
+
+.dark .glass-db {
+  background: oklch(0.15 0.04 265 / 0.1);
+  border-color: oklch(1 1 1 / 0.2);
+}

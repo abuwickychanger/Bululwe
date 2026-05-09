@@ -12,7 +12,9 @@ export default function CTASection() {
         <img
           src={IMAGES.campus}
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-full
+
+          -cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#002060]/95 to-[#002060]/80" />
       </div>

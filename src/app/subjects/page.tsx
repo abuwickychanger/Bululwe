@@ -1,3 +1,7 @@
 "use client";
 
-export { default } from "@/views/Subjects";
+import Subjects from "@/views/Subjects";
+
+export default function Page() {
+  return <Subjects />;
+}

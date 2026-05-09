@@ -1,3 +1,7 @@
 "use client";
 
-export { default } from "@/views/Academics";
+import Academics from "@/views/Academics";
+
+export default function Page() {
+  return <Academics />;
+}

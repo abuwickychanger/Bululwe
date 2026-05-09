@@ -1,3 +1,7 @@
 "use client";
 
-export { default } from "@/views/About";
+import About from "@/views/About";
+
+export default function Page() {
+  return <About />;
+}

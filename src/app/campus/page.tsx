@@ -1,3 +1,7 @@
 "use client";
 
-export { default } from "@/views/CampusLife";
+import CampusLife from "@/views/CampusLife";
+
+export default function Page() {
+  return <CampusLife />;
+}
