@@ -5,11 +5,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  // DATABASE_URL should be your Neon pooled connection string
-  url       = env("DATABASE_URL")
-  // DIRECT_URL should be your Neon direct connection string (no -pooler in URL)
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
 }
 
 model Download {
