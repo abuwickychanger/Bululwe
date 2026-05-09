@@ -32,7 +32,7 @@ interface StaffItem {
   bioSw: string | null;
   imageUrl: string | null;
   email: string | null;
-  hours: string;
+  hours: string | null;
   sortOrder: number;
 }
 
@@ -135,10 +135,10 @@ export default function StaffDirectoryBento({ staff }: { staff: StaffItem[] }) {
                 </p>
 
                 <div className="mt-auto space-y-2">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Clock className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-                    {staffMember.hours}
-                  </div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Clock className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                      {staffMember.hours ?? t("Hours not listed", "Saa hazijaorodheshwa", lang)}
+                    </div>
 
                   <Dialog>
                     <DialogTrigger asChild>
@@ -198,7 +198,7 @@ export default function StaffDirectoryBento({ staff }: { staff: StaffItem[] }) {
                             )}
                             <div className="flex items-center gap-2">
                               <Clock className="w-4 h-4" aria-hidden="true" />
-                              {staffMember.hours}
+                              {staffMember.hours ?? t("Hours not listed", "Saa hazijaorodheshwa", lang)}
                             </div>
                           </div>
                         </div>

@@ -16,7 +16,7 @@ interface StaffMember {
   bioSw: string | null;
   imageUrl: string | null;
   email: string | null;
-  hours: string;
+  hours: string | null;
   sortOrder: number;
 }
 
@@ -44,19 +44,7 @@ export default function CommunityClient({ staff }: { staff: StaffMember[] }) {
         </div>
       </section>
 
-      <StaffDirectoryBento staff={staff.map((s) => ({
-        id: s.id,
-        name: s.name,
-        roleEn: s.roleEn,
-        roleSw: s.roleSw,
-        department: s.department,
-        bioEn: s.bioEn,
-        bioSw: s.bioSw,
-        imageUrl: s.imageUrl,
-        email: s.email,
-        hours: s.hours,
-        sortOrder: s.sortOrder,
-      }))} />
+      <StaffDirectoryBento staff={staff} />
       <AlumniSection />
       <PortalPreview />
     </div>

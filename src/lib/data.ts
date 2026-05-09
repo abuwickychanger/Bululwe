@@ -58,14 +58,24 @@ export const getHighPriorityAnnouncements = unstable_cache(
 
 export const getStaff = unstable_cache(
   async () => {
-    try {
-      return await prisma.staff.findMany({ orderBy: { sortOrder: "asc" } });
-    } catch (e) {
-      console.error("[getStaff] DB query failed:", e);
-      return [];
-    }
+    return prisma.staff.findMany({
+      orderBy: { sortOrder: "asc" },
+      select: {
+        id: true,
+        name: true,
+        roleEn: true,
+        roleSw: true,
+        department: true,
+        bioEn: true,
+        bioSw: true,
+        imageUrl: true,
+        email: true,
+        hours: true,
+        sortOrder: true,
+      },
+    });
   },
-  ["staff"],
+  ["staff-v2"],
   { tags: ["staff"], revalidate: 86400 }
 );
 
