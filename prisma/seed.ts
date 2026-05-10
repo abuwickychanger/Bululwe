@@ -1,4 +1,4 @@
-import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaClient } from "../src/generated/prisma";
 import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
 
@@ -234,14 +234,14 @@ async function main() {
   // Seed Fee Structure
   await prisma.feeStructure.createMany({
     data: [
-      { formLevel: "Form 1", category: "Boarding", amount: 45000, academicYear: "2026" },
-      { formLevel: "Form 1", category: "Day", amount: 18500, academicYear: "2026" },
-      { formLevel: "Form 2", category: "Boarding", amount: 42000, academicYear: "2026" },
-      { formLevel: "Form 2", category: "Day", amount: 17500, academicYear: "2026" },
-      { formLevel: "Form 3", category: "Boarding", amount: 44000, academicYear: "2026" },
-      { formLevel: "Form 3", category: "Day", amount: 18000, academicYear: "2026" },
-      { formLevel: "Form 4", category: "Boarding", amount: 46000, academicYear: "2026" },
-      { formLevel: "Form 4", category: "Day", amount: 19500, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 1", category: "Boarding", amount: 45000, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 1", category: "Day", amount: 18500, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 2", category: "Boarding", amount: 42000, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 2", category: "Day", amount: 17500, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 3", category: "Boarding", amount: 44000, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 3", category: "Day", amount: 18000, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 4", category: "Boarding", amount: 46000, academicYear: "2026" },
+      { labelEn: "Tuition Fee", labelSw: "Ada ya Masomo", formLevel: "Form 4", category: "Day", amount: 19500, academicYear: "2026" },
     ],
   });
 

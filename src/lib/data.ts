@@ -100,7 +100,7 @@ export const getFeeMap = cache(async (year = "2026") => {
   const map: Record<string, Record<string, number>> = {};
   for (const row of rows) {
     if (!map[row.formLevel]) map[row.formLevel] = {};
-    map[row.formLevel][row.category] = row.amount;
+    map[row.formLevel][row.category] = Number(row.amount);
   }
   return map;
 });
